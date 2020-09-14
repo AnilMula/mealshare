@@ -6,7 +6,7 @@ const knex = require("../database");
 //1.returns all reservations
 router.get("/", async (request, response) => {
   try {
-    await knex("mealshare.reservation")
+    await knex("reservation")
       .select(
         "meal_id",
         "number_of_guests",

@@ -6,7 +6,7 @@ const knex = require("../database");
 //1.returns all reviews
 router.get("/", async (request, response) => {
   try {
-    await knex("mealshare.review")
+    await knex("review")
       .select("meal_id", "stars", "title")
       .then((data) => response.json(data));
   } catch (error) {

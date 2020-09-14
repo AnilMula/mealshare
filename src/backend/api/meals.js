@@ -8,7 +8,7 @@ const { json } = require("body-parser");
 router.get("/", async (request, response) => {
   try {
     if (Object.keys(request.query).length === 0) {
-      await knex("mealshare.meal")
+      await knex("meal")
         .select("title", "location", "price", "max_reservations")
         .then((data) => response.json(data));
     } else if (request.query.maxPrice) {
