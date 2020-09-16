@@ -13,7 +13,7 @@ router.get("/", async (request, response) => {
         .then((data) => response.json(data));
     } else if (request.query.maxPrice) {
       //6. Get meals that has a price smaller than maxPrice
-      await knex("mealshare.meal")
+      await knex("meal")
         .select("title", "price")
         .where("price", "<", request.query.maxPrice)
         .then((data) => response.json(data));
@@ -24,32 +24,32 @@ router.get("/", async (request, response) => {
       inner join reservation on meal.id =reservation.meal_id
       group by meal.id
       having meal.max_reservations > sum(number_of_guests) */
-      await knex("mealshare.meal")
+      await knex("meal")
         .select(
           "meal.id",
           "meal.title",
           "meal.max_reservations",
           knex.raw("sum(number_of_guests)")
         )
-        .innerJoin("mealshare.reservation", "meal.id", "reservation.meal_id")
+        .innerJoin("reservation", "meal.id", "reservation.meal_id")
         .groupBy("meal.id")
         .having("meal.max_reservations", ">", "sum(number_of_guests)")
         .then((data) => response.json(data));
     } else if (request.query.title) {
       //8. Get meals that partially match a title.
-      await knex("mealshare.meal")
+      await knex("meal")
         .select("title", "price")
         .where("title", "like", request.query.title)
         .then((data) => response.json(data));
     } else if (request.query.createdAfter) {
       //9.Get meals that has been created after the date
-      await knex("mealshare.meal")
+      await knex("meal")
         .select("title", "price")
         .where("created_date", ">", request.query.createdAfter)
         .then((data) => response.json(data));
     } else if (request.query.limit) {
       //10.Only specific number of meals
-      await knex("mealshare.meal")
+      await knex("meal")
         .select("title", "price")
         .limit(request.query.limit)
         .then((data) => response.json(data));
@@ -64,9 +64,9 @@ router.get("/", async (request, response) => {
 router.post("/", async (request, response) => {
   try {
     // to insert data
-    await knex("mealshare.meal")
+    console.log(request.body);
+    await knex("meal")
       .insert({
-        id: request.body.id,
         title: request.body.title,
         description: request.body.description,
         location: request.body.location,
@@ -85,7 +85,7 @@ router.post("/", async (request, response) => {
 //3.returns a meal id
 router.get("/:id", async (request, response) => {
   try {
-    const titles = await knex("mealshare.meal")
+    const titles = await knex("meal")
       .select("title", "location", "price")
       .where({ id: request.params.id });
     response.json(titles);
@@ -99,7 +99,7 @@ router.get("/:id", async (request, response) => {
 router.put("/:id", async (request, response) => {
   try {
     console.log(request.body.title);
-    await knex("mealshare.meal")
+    await knex("meal")
       .where({ id: request.params.id })
       .update({ title: request.body.title }, ["id", request.params.id]);
   } catch (error) {
@@ -111,7 +111,7 @@ router.put("/:id", async (request, response) => {
 // 5. Deletes the meal by id
 router.delete("/:id", async (request, response) => {
   try {
-    await knex("mealshare.meal")
+    await knex("meal")
       .where({ id: request.params.id })
       .del()
       .then((data) => response.send("record deleted"));

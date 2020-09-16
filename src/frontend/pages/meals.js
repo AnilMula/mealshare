@@ -38,6 +38,38 @@ window.handleMealsRequest = async () => {
         ></a>
       </div>
     </div>
+    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+    <div
+      id="navDemo"
+      class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top"
+      style="margin-top: 46px"
+    >
+      <a
+        href="meals"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Meals</a
+      >
+      <a
+        href="reservations"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Reservations</a
+      >
+      <a
+        href="reviews"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Reviews</a
+      >
+      <a
+        href="#"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Contact</a
+      >
+    </div>
+
     <!-- Page content -->
     <div class="w3-content" style="max-width: 2000px; margin-top: 46px">
       

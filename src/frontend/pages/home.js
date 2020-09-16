@@ -43,7 +43,7 @@ window.handleHomeRequest = () => {
             MORE <i class="fa fa-caret-down"></i>
           </button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
-            <a href="#" class="w3-bar-item w3-button">Merchandise</a>
+            <a href="addmeal" class="w3-bar-item w3-button" data-navigo>Add a Meal</a>
             <a href="#" class="w3-bar-item w3-button">Extras</a>
             <a href="#" class="w3-bar-item w3-button">Media</a>
           </div>
@@ -63,28 +63,28 @@ window.handleHomeRequest = () => {
       style="margin-top: 46px"
     >
       <a
-        href="#band"
+        href="meals"
         class="w3-bar-item w3-button w3-padding-large"
         onclick="myFunction()"
-        >BAND</a
+        >Meals</a
       >
       <a
-        href="#tour"
+        href="reservations"
         class="w3-bar-item w3-button w3-padding-large"
         onclick="myFunction()"
-        >TOUR</a
+        >Reservations</a
       >
       <a
-        href="#contact"
+        href="reviews"
         class="w3-bar-item w3-button w3-padding-large"
         onclick="myFunction()"
-        >CONTACT</a
+        >Reviews</a
       >
       <a
         href="#"
         class="w3-bar-item w3-button w3-padding-large"
         onclick="myFunction()"
-        >MERCH</a
+        >Contact</a
       >
     </div>
 
