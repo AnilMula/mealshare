@@ -24,11 +24,11 @@ router.get("/", async (request, response) => {
 router.post("/", async (request, response) => {
   try {
     // to insert data
-    await knex("mealshare.reservation")
+    console.log(request.body);
+    await knex("reservation")
       .insert({
-        id: request.body.id,
-        created_date: request.body.date,
-        number_of_guests: request.body.guests,
+        created_date: request.body.created_date,
+        number_of_guests: request.body.no_of_guests,
         contact_phonenumber: request.body.phone,
         contact_name: request.body.name,
         meal_id: request.body.mealid,
@@ -43,7 +43,7 @@ router.post("/", async (request, response) => {
 //3.Returns reservation by id
 router.get("/:id", async (request, response) => {
   try {
-    const titles = await knex("mealshare.reservation")
+    const titles = await knex("reservation")
       .select(
         "meal_id",
         "number_of_guests",
@@ -61,7 +61,7 @@ router.get("/:id", async (request, response) => {
 //4.Updates the reservation by id
 router.put("/:id", async (request, response) => {
   try {
-    await knex("mealshare.reservation")
+    await knex("reservation")
       .where({ id: request.params.id })
       .update({ number_of_guests: request.body.guests }, [
         "id",
@@ -76,7 +76,7 @@ router.put("/:id", async (request, response) => {
 // 5. Deletes the reservation by id
 router.delete("/:id", async (request, response) => {
   try {
-    await knex("mealshare.reservation")
+    await knex("reservation")
       .where({ id: request.params.id })
       .del()
       .then((data) => response.send("record deleted"));

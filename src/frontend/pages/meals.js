@@ -87,9 +87,7 @@ window.handleMealsRequest = async () => {
         <div class="w3-row w3-padding-32" id = "all-meals">
           
         </div>
-        <div class="w3-row w3-padding-32" id = "each-meal">
-          <h5>each meal</h5>
-        </div>
+        
       </div>
     
       <!-- End Page Content -->
@@ -123,12 +121,20 @@ window.handleMealsRequest = async () => {
     meals.forEach((meal, index) => {
       body.innerHTML += `<div class="w3-third">
             <p>${meal.title}</p>
-            <a href="#each-meal" id="image_link_each_meal"><img
+            <a href="addreservation" class="w3-bar-item w3-button data-navigo"><img
               src="../images/food${index + 1}.jpg"
               class="w3-round"
               alt="Random Name"
               style="width: 60%"
             /></a>
+            <a href="addreservation" class="w3-bar-item w3-button data-navigo">
+            <button class="w3-button w3-blue w3-round-xxlarge" id = "book-meal${
+              index + 1
+            }">Book Meal</button></a>            
+            <button class="w3-button w3-purple w3-round-xxlarge" id ="rate-meal${
+              index + 1
+            }">Rate Meal</button>
+
           </div>`;
     });
   };

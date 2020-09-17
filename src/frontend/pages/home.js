@@ -44,7 +44,7 @@ window.handleHomeRequest = () => {
           </button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
             <a href="addmeal" class="w3-bar-item w3-button" data-navigo>Add a Meal</a>
-            <a href="#" class="w3-bar-item w3-button">Extras</a>
+            <a href="addreservation" class="w3-bar-item w3-button data-navigo">Add a reservation</a>
             <a href="#" class="w3-bar-item w3-button">Media</a>
           </div>
         </div>
@@ -251,16 +251,31 @@ window.handleHomeRequest = () => {
     <footer
       class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge"
     >
-      <i class="fa fa-facebook-official w3-hover-opacity"></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-snapchat w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-      <i class="fa fa-linkedin w3-hover-opacity"></i>
+      <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-facebook-official w3-hover-opacity"></a
+        ></i>
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-instagram w3-hover-opacity"></i></a>
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-youtube w3-hover-opacity"></i></a>
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-twitter w3-hover-opacity"></i></a>
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-github w3-hover-opacity"></i></a>
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-whatsapp w3-hover-opacity"></i></a>          
+        <a href="https://anilmula.github.io/" target="_blank"
+          ><i class="fa fa-google w3-hover-opacity"></i></a>
+      
+      
+      
+      
       <p class="w3-medium">
-        Powered by
-        <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
-          >w3.css</a
+        Developed by
+        <a href="https://anilmula.github.io/" target="_blank"
+          >ANIL KUMAR MULA</a
         >
       </p>
     </footer>

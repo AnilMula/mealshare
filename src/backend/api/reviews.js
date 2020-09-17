@@ -19,7 +19,7 @@ router.get("/", async (request, response) => {
 router.post("/", async (request, response) => {
   try {
     // to insert data
-    await knex("mealshare.review")
+    await knex("review")
       .insert({
         id: request.body.id,
         title: request.body.title,
@@ -38,7 +38,7 @@ router.post("/", async (request, response) => {
 //3.Returns review by id
 router.get("/:id", async (request, response) => {
   try {
-    const titles = await knex("mealshare.review")
+    const titles = await knex("review")
       .select("meal_id", "stars", "title")
       .where({ id: request.params.id });
     response.json(titles);
@@ -51,7 +51,7 @@ router.get("/:id", async (request, response) => {
 //4.Updates the review by id
 router.put("/:id", async (request, response) => {
   try {
-    await knex("mealshare.review")
+    await knex("review")
       .where({ id: request.params.id })
       .update({ stars: request.body.stars }, ["id", request.params.id]);
   } catch (error) {
@@ -63,7 +63,7 @@ router.put("/:id", async (request, response) => {
 // 5. Deletes the review by id
 router.delete("/:id", async (request, response) => {
   try {
-    await knex("mealshare.review")
+    await knex("review")
       .where({ id: request.params.id })
       .del()
       .then((data) => response.send("record deleted"));

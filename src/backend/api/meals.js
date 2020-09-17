@@ -9,7 +9,7 @@ router.get("/", async (request, response) => {
   try {
     if (Object.keys(request.query).length === 0) {
       await knex("meal")
-        .select("title", "location", "price", "max_reservations")
+        .select("id", "title", "location", "price", "max_reservations")
         .then((data) => response.json(data));
     } else if (request.query.maxPrice) {
       //6. Get meals that has a price smaller than maxPrice
