@@ -21,11 +21,9 @@ router.post("/", async (request, response) => {
     // to insert data
     await knex("review")
       .insert({
-        id: request.body.id,
-        title: request.body.title,
-        description: request.body.description,
-        stars: request.body.stars,
-        created_date: request.body.date,
+        title: request.body.comments,
+        stars: request.body.rating,
+        created_date: request.body.created_date,
         meal_id: request.body.mealid,
       })
       .then(() => response.send("record inserted"));

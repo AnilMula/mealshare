@@ -17,3 +17,4 @@ router.on("/reviews", window.handleReviewsRequest).resolve();
 router.on("/meal/:id", window.handleMealRequest).resolve();
 router.on("/addmeal", window.handleAddMealRequest).resolve();
 router.on("/addreservation", window.handleAddReservationRequest).resolve();
+router.on("/addreview", window.handleAddReviewRequest).resolve();
