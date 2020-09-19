@@ -80,6 +80,13 @@ window.handleHomeRequest = () => {
         onclick="myFunction()"
         >Reviews</a
       >
+      
+      <a
+        href="addmeal"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Add Meal</a
+      >
       <a
         href="#"
         class="w3-bar-item w3-button w3-padding-large"
@@ -251,27 +258,20 @@ window.handleHomeRequest = () => {
     <footer
       class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge"
     >
-      <a href="https://anilmula.github.io/" target="_blank"
+      <a href="https://www.facebook.com/anilreddy.mula" target="_blank"
           ><i class="fa fa-facebook-official w3-hover-opacity"></a
         ></i>
-        <a href="https://anilmula.github.io/" target="_blank"
+        <a href="https://www.instagram.com/anil_mula/" target="_blank"
           ><i class="fa fa-instagram w3-hover-opacity"></i></a>
-        <a href="https://anilmula.github.io/" target="_blank"
+        <a href="https://www.linkedin.com/in/anil-kumar-56729475/" target="_blank"
           ><i class="fa fa-linkedin w3-hover-opacity"></i></a>
-        <a href="https://anilmula.github.io/" target="_blank"
-          ><i class="fa fa-youtube w3-hover-opacity"></i></a>
-        <a href="https://anilmula.github.io/" target="_blank"
+        <a href="https://twitter.com/" target="_blank"
           ><i class="fa fa-twitter w3-hover-opacity"></i></a>
-        <a href="https://anilmula.github.io/" target="_blank"
-          ><i class="fa fa-github w3-hover-opacity"></i></a>
-        <a href="https://anilmula.github.io/" target="_blank"
-          ><i class="fa fa-whatsapp w3-hover-opacity"></i></a>          
-        <a href="https://anilmula.github.io/" target="_blank"
+        <a href="https://github.com/AnilMula" target="_blank"
+          ><i class="fa fa-github w3-hover-opacity"></i></a>          
+        <a href="https://www.google.com/search?q=anil+kumar+mula&oq=&aqs=chrome.0.69i59l8.690007370j0j15&sourceid=chrome&ie=UTF-8"
           ><i class="fa fa-google w3-hover-opacity"></i></a>
-      
-      
-      
-      
+            
       <p class="w3-medium">
         Developed by
         <a href="https://anilmula.github.io/" target="_blank"
