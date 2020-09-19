@@ -84,35 +84,10 @@ window.handleReservationsRequest = async () => {
         <p class="w3-justify">
           
         </p>
-        <div class="w3-row w3-padding-32">
-          <div class="w3-third">
-            <p>Name</p>
-            <img
-              src="../images/food1.jpg"
-              class="w3-round w3-margin-bottom"
-              alt="meal1"
-              style="width: 60%"
-            />
-          </div>
-          <div class="w3-third">
-            <p>Name</p>
-            <img
-              src="../images/food2.jpg"
-              class="w3-round w3-margin-bottom"
-              alt="Random Name"
-              style="width: 60%"
-            />
-          </div>
-          <div class="w3-third">
-            <p>Name</p>
-            <img
-              src="../images/food3.jpg"
-              class="w3-round"
-              alt="Random Name"
-              style="width: 60%"
-            />
-          </div>
+        <div class="w3-row w3-padding-32" id = "all-reservations">
+          
         </div>
+        
       </div>
     
       <!-- End Page Content -->
@@ -144,6 +119,32 @@ window.handleReservationsRequest = async () => {
       </p>
     </footer>
       </body>`;
+
+  // a callback function to dispaly all the meals
+  const displayReservationsOnDocument = (reservations) => {
+    const body = document.getElementById("all-reservations");
+
+    reservations.forEach((reservation, index) => {
+      body.innerHTML += `<div class="w3-third">
+            <p>${reservation.meal_id}</p>
+            <p>${reservation.number_of_guests} for ${
+        reservation.contact_name
+      }</p>
+            <img
+              src="../images/food${index + 1}.jpg"
+              class="w3-round"
+              alt="Random Name"
+              style="width: 60%"
+            />
+            
+
+          </div>`;
+    });
+  };
+  fetch("/api/reservations")
+    .then((response) => response.json())
+    .then((reservations) => displayReservationsOnDocument(reservations));
+
   // if any links are added to the dom, use this function
   // make the router handle those links.
   router.updatePageLinks();

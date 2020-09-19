@@ -123,7 +123,6 @@ window.handleMealsRequest = async () => {
 
   // a callback function to dispaly all the meals
   const displayMealsOnDocument = (meals) => {
-    console.log(meals);
     const body = document.getElementById("all-meals");
 
     meals.forEach((meal, index) => {
@@ -138,10 +137,11 @@ window.handleMealsRequest = async () => {
             <a href="addreservation" class="w3-bar-item w3-button data-navigo">
             <button class="w3-button w3-blue w3-round-xxlarge" id = "book-meal${
               index + 1
-            }">Book Meal</button></a>            
+            }">Book Meal</button></a>
+            <a href="addreview" class="w3-bar-item w3-button data-navigo">            
             <button class="w3-button w3-purple w3-round-xxlarge" id ="rate-meal${
               index + 1
-            }">Rate Meal</button>
+            }">Rate Meal</button></a>
 
           </div>`;
     });
@@ -155,4 +155,7 @@ window.handleMealsRequest = async () => {
   imageLink.addEventListener("click", () => {
     window.alert("on click");
   });
+  // if any links are added to the dom, use this function
+  // make the router handle those links.
+  router.updatePageLinks();
 };
