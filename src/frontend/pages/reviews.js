@@ -84,34 +84,8 @@ window.handleReviewsRequest = () => {
         <p class="w3-justify">
           
         </p>
-        <div class="w3-row w3-padding-32">
-          <div class="w3-third">
-            <p>Name</p>
-            <img
-              src="../images/food6.jpg"
-              class="w3-round w3-margin-bottom"
-              alt="meal1"
-              style="width: 60%"
-            />
-          </div>
-          <div class="w3-third">
-            <p>Name</p>
-            <img
-              src="../images/food8.jpg"
-              class="w3-round w3-margin-bottom"
-              alt="Random Name"
-              style="width: 60%"
-            />
-          </div>
-          <div class="w3-third">
-            <p>Name</p>
-            <img
-              src="../images/food3.jpg"
-              class="w3-round"
-              alt="Random Name"
-              style="width: 60%"
-            />
-          </div>
+        <div class="w3-row w3-padding-32" id = "all-reviews">
+          
         </div>
       </div>
     
@@ -144,4 +118,37 @@ window.handleReviewsRequest = () => {
       </p>
     </footer>
       </body>`;
+
+  // a callback function to dispaly all the reviews
+  const displayReviewsOnDocument = (reviews) => {
+    const body = document.getElementById("all-reviews");
+
+    reviews.forEach((review, index) => {
+      body.innerHTML += `<div class="w3-third">
+            <p>${review.meal_id}</p>
+            <p>rating: ${review.stars} </p>
+            <img
+              src="../images/food${index + 1}.jpg"
+              class="w3-round"
+              alt="Random Name"
+              style="width: 60%"
+            />
+            <p>comments: ${review.title} </p>
+
+          </div>`;
+    });
+  };
+  fetch("/api/reviews")
+    .then((response) => response.json())
+    .then((reviews) => {
+      displayReviewsOnDocument(
+        reviews.sort((a, b) => {
+          return a.meal_id - b.meal_id;
+        })
+      );
+    });
+
+  // if any links are added to the dom, use this function
+  // make the router handle those links.
+  router.updatePageLinks();
 };

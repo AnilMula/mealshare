@@ -120,7 +120,7 @@ window.handleReservationsRequest = async () => {
     </footer>
       </body>`;
 
-  // a callback function to dispaly all the meals
+  // a callback function to dispaly all the reservations
   const displayReservationsOnDocument = (reservations) => {
     const body = document.getElementById("all-reservations");
 
