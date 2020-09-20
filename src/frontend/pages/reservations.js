@@ -125,7 +125,7 @@ window.handleReservationsRequest = async () => {
     const body = document.getElementById("all-reservations");
 
     reservations.forEach((reservation, index) => {
-      body.innerHTML += `<div class="w3-third">
+      body.innerHTML += `<div class="w3-third w3-border">
             <p>${reservation.meal_id}</p>
             <p>${reservation.number_of_guests} for ${
         reservation.contact_name

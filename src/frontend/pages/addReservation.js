@@ -50,15 +50,16 @@ window.handleAddReservationRequest = async () => {
       >
         <h2 class="w3-wide">Meal reservation</h2>
         <p class="w3-opacity"><i>you can register for a meal here</i></p>
+        <p id="success-reserve-meal"></p>
         <p class="w3-justify">
           
         </p>
-        <div class="w3-padding-small w3-grey" style="width:50%"> 
-          <div class="w3-black">
-          <h2>Add a Meal</h2>
+        <div class="w3-padding-small w3-blue" style="width:50%"> 
+          <div class="w3-pink w3-round-large">
+          <h2>Reserve Meal</h2>
           
           </div>
-          <form action="" class="" name="add-meal">
+          <form action="" class="" name="">
           <div>
           <label>Meal id</label>
           <input class="w3-input" type="text" id = "mealid" name = "mealid" required></div>
@@ -75,7 +76,7 @@ window.handleAddReservationRequest = async () => {
           <label>created date</label>
           <input class="w3-input" type="date" id = "created_date" name="created_date"  required></div>
         
-          <button type="submit"  id = "submit" onClick="validateReservationForm()">Reserve</button>
+          <button type="submit" class="w3-pink w3-round-large" id = "submit" onClick="validateReservationForm()">Reserve</button>
           </form>
         
         </div>
@@ -111,15 +112,15 @@ window.handleAddReservationRequest = async () => {
       
       </body>`;
 };
-const addReservation = () => {
-  // get meal data from the HTML Form
+const addReservation = async () => {
+  // get book meal(reservation) data from the HTML Form
   const mealid = document.getElementById("mealid");
   const name = document.getElementById("name");
   const no_of_guests = document.getElementById("no_of_guests");
   const phone = document.getElementById("phone");
   const created_date = document.getElementById("created_date");
 
-  //push meal data from user into an object
+  //push book meal data from user into an object
   const newReservation = {
     mealid: mealid.value,
     name: name.value,
@@ -127,29 +128,29 @@ const addReservation = () => {
     phone: phone.value,
     created_date: created_date.value,
   };
-
-  fetch("/api/reservations", {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json" },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: JSON.stringify(newReservation),
-  })
-    .then((resp) => {
-      alert("Reserved a meal succesfully");
-    })
-    .catch((err) => {
-      console.log(err);
+  try {
+    const resp = await fetch("/api/reservations", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(newReservation),
     });
+
+    const successMessage = document.getElementById("success-reserve-meal");
+    successMessage.innerHTML = `${resp}`;
+  } catch (err) {
+    console.log(err);
+  }
 };
 // get the submit button
 //const submit = document.getElementById("submit");
 //submit.addEventListener("click", addMeal);
 
-// form validation
+// form validation validateReservationForm()
 function validateReservationForm() {
   const name = document.getElementById("name").value;
   const no_of_guests = document.getElementById("no_of_guests").value;

@@ -64,7 +64,7 @@ router.get("/", async (request, response) => {
 router.post("/", async (request, response) => {
   try {
     // to insert data
-    console.log(request.body);
+
     await knex("meal")
       .insert({
         title: request.body.title,

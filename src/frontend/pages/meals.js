@@ -126,7 +126,7 @@ window.handleMealsRequest = async () => {
     const body = document.getElementById("all-meals");
 
     meals.forEach((meal, index) => {
-      body.innerHTML += `<div class="w3-third">
+      body.innerHTML += `<div class="w3-third w3-border">
             <p>${meal.title}</p>
             <a href="addreservation" class="w3-bar-item w3-button data-navigo"><img
               src="../images/food${index + 1}.jpg"

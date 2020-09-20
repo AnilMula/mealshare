@@ -48,14 +48,14 @@ window.handleAddReviewRequest = async () => {
         style="max-width: 800px"
         id="band"
       >
-        <h2 class="w3-wide">Rate a meal</h2>
+        <h2 class="w3-wide ">Rate a meal</h2>
         <p class="w3-opacity"><i>please rate our meals</i></p>
         <p class="w3-justify">
           
         </p>
-        <div class="w3-padding-small w3-grey" style="width:50%"> 
+        <div class="w3-padding-small w3-purple" style="width:50%"> 
           <div class="w3-black">
-          <h2>Rate a Meal</h2>
+          <h2 class = "w3-yellow w3-round-large">Rate a Meal</h2>
           
           </div>
           <form action="" class="" >
@@ -72,7 +72,7 @@ window.handleAddReviewRequest = async () => {
           <label>created date</label>
           <input class="w3-input" type="date" id = "created_date" name="created_date"  required></div>
         
-          <button type="submit"  id = "submit" onClick="validateReservationForm()">Rate</button>
+          <button type="submit"  class="w3-yellow w3-round-large" id = "submit" onClick="validateReviewForm()">Rate</button>
           </form>
         
         </div>
@@ -145,7 +145,7 @@ const addReview = () => {
 //submit.addEventListener("click", addMeal);
 
 // form validation
-function validateReservationForm() {
+function validateReviewForm() {
   const comments = document.getElementById("comments").value;
   const rating = document.getElementById("rating").value;
   if (comments == "" || rating == " ") {

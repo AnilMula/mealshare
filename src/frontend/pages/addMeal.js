@@ -150,7 +150,7 @@ const addMeal = () => {
     body: JSON.stringify(newMeal),
   })
     .then((resp) => {
-      alert("Your booking is submited succesfully");
+      console.log(resp);
     })
     .catch((err) => {
       console.log(err);

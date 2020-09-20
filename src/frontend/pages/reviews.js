@@ -124,7 +124,7 @@ window.handleReviewsRequest = () => {
     const body = document.getElementById("all-reviews");
 
     reviews.forEach((review, index) => {
-      body.innerHTML += `<div class="w3-third">
+      body.innerHTML += `<div class="w3-third w3-border">
             <p>${review.meal_id}</p>
             <p>rating: ${review.stars} </p>
             <img
