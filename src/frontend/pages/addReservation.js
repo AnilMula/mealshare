@@ -192,4 +192,5 @@ window.handleAddReservationRequest = async (params) => {
   // get the submit button
   const submit = document.getElementById("submit");
   submit.addEventListener("click", validateReservationForm);
+  router.updatePageLinks();
 };

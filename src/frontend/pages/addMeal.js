@@ -115,6 +115,7 @@ window.handleAddMealRequest = async () => {
     </footer>
       <script src="/addMealFormValidation.js"></script>
       </body>`;
+  router.updatePageLinks();
 };
 const addMeal = () => {
   // get meal data from the HTML Form

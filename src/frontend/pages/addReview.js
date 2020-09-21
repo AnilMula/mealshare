@@ -186,4 +186,5 @@ window.handleAddReviewRequest = async (params) => {
   // get the submit button
   const submit = document.getElementById("submit");
   submit.addEventListener("click", validateReviewForm);
+  router.updatePageLinks();
 };
