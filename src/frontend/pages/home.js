@@ -44,7 +44,7 @@ window.handleHomeRequest = () => {
           </button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
             <a href="addmeal" class="w3-bar-item w3-button" data-navigo>Add a Meal</a>
-            <a href="addreservation" class="w3-bar-item w3-button data-navigo">Add a reservation</a>
+            <a href="addreservation" class="w3-bar-item w3-button" data-navigo>Add a reservation</a>
             <a href="#" class="w3-bar-item w3-button">Media</a>
           </div>
         </div>
@@ -259,8 +259,8 @@ window.handleHomeRequest = () => {
       class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge"
     >
       <a href="https://www.facebook.com/anilreddy.mula" target="_blank"
-          ><i class="fa fa-facebook-official w3-hover-opacity"></a
-        ></i>
+          ><i class="fa fa-facebook-official w3-hover-opacity"></i></a
+        >
         <a href="https://www.instagram.com/anil_mula/" target="_blank"
           ><i class="fa fa-instagram w3-hover-opacity"></i></a>
         <a href="https://www.linkedin.com/in/anil-kumar-56729475/" target="_blank"

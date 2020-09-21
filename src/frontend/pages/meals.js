@@ -98,8 +98,8 @@ window.handleMealsRequest = async () => {
       class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge"
     >
       <a href="https://www.facebook.com/anilreddy.mula" target="_blank"
-          ><i class="fa fa-facebook-official w3-hover-opacity"></a
-        ></i>
+          ><i class="fa fa-facebook-official w3-hover-opacity"></i></a
+        >
         <a href="https://www.instagram.com/anil_mula/" target="_blank"
           ><i class="fa fa-instagram w3-hover-opacity"></i></a>
         <a href="https://www.linkedin.com/in/anil-kumar-56729475/" target="_blank"
@@ -128,17 +128,17 @@ window.handleMealsRequest = async () => {
     meals.forEach((meal, index) => {
       body.innerHTML += `<div class="w3-third w3-border">
             <p>${meal.title}</p>
-            <a href="addreservation" class="w3-bar-item w3-button data-navigo"><img
+            <a href="addreservation" class="w3-bar-item w3-button" data-navigo><img
               src="../images/food${index + 1}.jpg"
               class="w3-round"
               alt="Random Name"
               style="width: 60%"
             /></a>
-            <a href="addreservation" class="w3-bar-item w3-button data-navigo">
+            <a href="addreservation" class="w3-bar-item w3-button" data-navigo>
             <button class="w3-button w3-blue w3-round-xxlarge" id = "book-meal${
               index + 1
             }">Book Meal</button></a>
-            <a href="addreview" class="w3-bar-item w3-button data-navigo">            
+            <a href="addreview" class="w3-bar-item w3-button" data-navigo>            
             <button class="w3-button w3-purple w3-round-xxlarge" id ="rate-meal${
               index + 1
             }">Rate Meal</button></a>

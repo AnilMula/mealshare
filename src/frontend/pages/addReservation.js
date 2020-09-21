@@ -89,8 +89,8 @@ window.handleAddReservationRequest = async () => {
       class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge"
     >
       <a href="https://www.facebook.com/anilreddy.mula" target="_blank"
-          ><i class="fa fa-facebook-official w3-hover-opacity"></a
-        ></i>
+          ><i class="fa fa-facebook-official w3-hover-opacity"></i></a
+        >
         <a href="https://www.instagram.com/anil_mula/" target="_blank"
           ><i class="fa fa-instagram w3-hover-opacity"></i></a>
         <a href="https://www.linkedin.com/in/anil-kumar-56729475/" target="_blank"
