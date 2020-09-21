@@ -1,4 +1,4 @@
-window.handleAddReviewRequest = async () => {
+window.handleAddReviewRequest = async (params) => {
   document.title = "Meal Share : Rate a meal....";
 
   document.body.innerHTML = `<body>
@@ -12,22 +12,22 @@ window.handleAddReviewRequest = async () => {
           title="Toggle Navigation Menu"
           ><i class="fa fa-bars"></i
         ></a>
-        <a href="home" class="w3-bar-item w3-button w3-padding-large">Home</a>
-        <a href="meals" class="w3-bar-item w3-button w3-padding-large w3-hide-small" data-navigo>Meals</a>
+        <a href="/home" class="w3-bar-item w3-button w3-padding-large">Home</a>
+        <a href="/meals" class="w3-bar-item w3-button w3-padding-large w3-hide-small" data-navigo>Meals</a>
         <a
-          href="reservations"
+          href="/reservations"
           class="w3-bar-item w3-button w3-padding-large w3-hide-small"
           data-navigo
           >Reservations</a
         >
         <a
-          href="reviews"
+          href="/reviews"
           class="w3-bar-item w3-button w3-padding-large w3-hide-small"
           data-navigo
           >Reviews</a
         >
         <a
-          href="home#contact"
+          href="/home#contact"
           class="w3-bar-item w3-button w3-padding-large w3-hide-small"
           >Contact</a
         >
@@ -48,20 +48,19 @@ window.handleAddReviewRequest = async () => {
         style="max-width: 800px"
         id="band"
       >
-        <h2 class="w3-wide ">Rate a meal</h2>
+        <h2 class="w3-wide ">Rate this meal</h2>
         <p class="w3-opacity"><i>please rate our meals</i></p>
-        <p class="w3-justify">
+        <p class="w3-justify" id="selected-meal-for-review">
           
         </p>
         <div class="w3-padding-small w3-purple" style="width:50%"> 
           <div class="w3-black">
-          <h2 class = "w3-yellow w3-round-large">Rate a Meal</h2>
+          <h2 class = "w3-yellow w3-round-large">Rate this Meal</h2>
           
           </div>
           <form action="" class="" >
-          <div>
-          <label>Meal id</label>
-          <input class="w3-input" type="text" id = "mealid" name = "mealid" required></div>
+          
+          
           <div>
           <label>Comments</label>
           <input class="w3-input" type="text" id = "comments" name = "comments" required></div>
@@ -107,50 +106,84 @@ window.handleAddReviewRequest = async () => {
     </footer>
       
       </body>`;
-};
-const addReview = () => {
-  // get meal data from the HTML Form
-  const mealid = document.getElementById("mealid");
-  const comments = document.getElementById("comments");
-  const rating = document.getElementById("rating");
-  const created_date = document.getElementById("created_date");
 
-  //push review data from user into an object
-  const newReview = {
-    mealid: mealid.value,
-    comments: comments.value,
-    rating: rating.value,
-    created_date: created_date.value,
+  // a callback function to display selected meal on the review page
+  const displaySelectedMealOnReviewDocument = (meal) => {
+    const mealDateTime = new Date(Date.parse(meal[0].when));
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const formattedMealDateTime = `${mealDateTime.getDate()},${
+      months[mealDateTime.getMonth()]
+    } ${mealDateTime.getFullYear()} at ${mealDateTime.getHours()}:${mealDateTime.getMinutes()}`;
+
+    const selectedMealInformation = document.getElementById(
+      "selected-meal-for-review"
+    );
+    selectedMealInformation.innerHTML += `<div class="w3-text-pink"><b class="w3-text-purple">Meal name: </b>${meal[0].title}</div>
+    <div class="w3-text-pink"> <b class="w3-text-purple">Price: </b>${meal[0].price} DKK</div>
+    <div class="w3-text-pink"><b class="w3-text-purple">Location: </b>${meal[0].location}</div>
+    <div class="w3-text-pink"><b class="w3-text-purple">Date and time: </b>${formattedMealDateTime}</div>`;
   };
-  console.log("ready to fetch");
-  fetch("/api/reviews", {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json" },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: JSON.stringify(newReview),
-  })
-    .then((resp) => {
-      alert("Rated a meal succesfully");
+  //fetch meal data for the selected meal and display meal information on the review page
+  fetch(`/api/meals/${params.id}`)
+    .then((response) => response.json())
+    .then((meal) => displaySelectedMealOnReviewDocument(meal));
+  const addReview = () => {
+    // get meal data from the HTML Form
+
+    const comments = document.getElementById("comments");
+    const rating = document.getElementById("rating");
+    const created_date = document.getElementById("created_date");
+
+    //push review data from user into an object
+    const newReview = {
+      meal_id: parseInt(params.id),
+      comments: comments.value,
+      rating: rating.value,
+      created_date: created_date.value,
+    };
+
+    fetch("/api/reviews", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(newReview),
     })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-// get the submit button
-//const submit = document.getElementById("submit");
-//submit.addEventListener("click", addMeal);
+      .then((resp) => {
+        alert("Rated a meal succesfully");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-// form validation
-function validateReviewForm() {
-  const comments = document.getElementById("comments").value;
-  const rating = document.getElementById("rating").value;
-  if (comments == "" || rating == " ") {
-    return false;
+  // form validation
+  function validateReviewForm() {
+    const comments = document.getElementById("comments").value;
+    const rating = document.getElementById("rating").value;
+    if (comments == "" || rating == " ") {
+      return false;
+    }
+
+    addReview();
   }
-
-  addReview();
-}
+  // get the submit button
+  const submit = document.getElementById("submit");
+  submit.addEventListener("click", validateReviewForm);
+};

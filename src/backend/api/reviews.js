@@ -24,7 +24,7 @@ router.post("/", async (request, response) => {
         title: request.body.comments,
         stars: request.body.rating,
         created_date: request.body.created_date,
-        meal_id: request.body.mealid,
+        meal_id: request.body.meal_id,
       })
       .then(() => response.send("record inserted"));
   } catch (error) {

@@ -31,7 +31,7 @@ router.post("/", async (request, response) => {
         number_of_guests: request.body.no_of_guests,
         contact_phonenumber: request.body.phone,
         contact_name: request.body.name,
-        meal_id: request.body.mealid,
+        meal_id: request.body.meal_id,
       })
       .then(() => response.send("record inserted"));
   } catch (error) {

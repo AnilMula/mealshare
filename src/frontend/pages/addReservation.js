@@ -1,4 +1,4 @@
-window.handleAddReservationRequest = async () => {
+window.handleAddReservationRequest = async (params) => {
   document.title = "Meal Share : Add a reservation....";
 
   document.body.innerHTML = `<body>
@@ -12,22 +12,22 @@ window.handleAddReservationRequest = async () => {
           title="Toggle Navigation Menu"
           ><i class="fa fa-bars"></i
         ></a>
-        <a href="home" class="w3-bar-item w3-button w3-padding-large">Home</a>
-        <a href="meals" class="w3-bar-item w3-button w3-padding-large w3-hide-small" data-navigo>Meals</a>
+        <a href="/" class="w3-bar-item w3-button w3-padding-large">Home</a>
+        <a href="/meals" class="w3-bar-item w3-button w3-padding-large w3-hide-small" data-navigo>Meals</a>
         <a
-          href="reservations"
+          href="/reservations"
           class="w3-bar-item w3-button w3-padding-large w3-hide-small"
           data-navigo
           >Reservations</a
         >
         <a
-          href="reviews"
+          href="/reviews"
           class="w3-bar-item w3-button w3-padding-large w3-hide-small"
           data-navigo
           >Reviews</a
         >
         <a
-          href="home#contact"
+          href="/home#contact"
           class="w3-bar-item w3-button w3-padding-large w3-hide-small"
           >Contact</a
         >
@@ -49,9 +49,9 @@ window.handleAddReservationRequest = async () => {
         id="band"
       >
         <h2 class="w3-wide">Meal reservation</h2>
-        <p class="w3-opacity"><i>you can register for a meal here</i></p>
+        <p class="w3-opacity"><i>you can register for a meal here </i></p>
         <p id="success-reserve-meal"></p>
-        <p class="w3-justify">
+        <p class="w3-justify" id = "selected-meal">
           
         </p>
         <div class="w3-padding-small w3-blue" style="width:50%"> 
@@ -60,9 +60,7 @@ window.handleAddReservationRequest = async () => {
           
           </div>
           <form action="" class="" name="">
-          <div>
-          <label>Meal id</label>
-          <input class="w3-input" type="text" id = "mealid" name = "mealid" required></div>
+          
           <div>
           <label>name</label>
           <input class="w3-input" type="text" id = "name" name = "name" required></div>
@@ -111,53 +109,87 @@ window.handleAddReservationRequest = async () => {
     </footer>
       
       </body>`;
-};
-const addReservation = async () => {
-  // get book meal(reservation) data from the HTML Form
-  const mealid = document.getElementById("mealid");
-  const name = document.getElementById("name");
-  const no_of_guests = document.getElementById("no_of_guests");
-  const phone = document.getElementById("phone");
-  const created_date = document.getElementById("created_date");
 
-  //push book meal data from user into an object
-  const newReservation = {
-    mealid: mealid.value,
-    name: name.value,
-    no_of_guests: no_of_guests.value,
-    phone: phone.value,
-    created_date: created_date.value,
+  // a callback function to display selected meal on the add reservation page
+  const displaySelectedMealOnDocument = (meal) => {
+    const mealDateTime = new Date(Date.parse(meal[0].when));
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const formattedMealDateTime = `${mealDateTime.getDate()},${
+      months[mealDateTime.getMonth()]
+    } ${mealDateTime.getFullYear()} at ${mealDateTime.getHours()}:${mealDateTime.getMinutes()}`;
+
+    const selectedMealInformation = document.getElementById("selected-meal");
+    selectedMealInformation.innerHTML += `<div class="w3-text-pink"><b class="w3-text-blue">Meal name: </b>${meal[0].title}</div>
+    <div class="w3-text-pink"> <b class="w3-text-blue">Price: </b>${meal[0].price} DKK</div>
+    <div class="w3-text-pink"><b class="w3-text-blue">Location: </b>${meal[0].location}</div>
+    <div class="w3-text-pink"><b class="w3-text-blue">Date and time: </b>${formattedMealDateTime}</div>`;
   };
-  try {
-    const resp = await fetch("/api/reservations", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(newReservation),
-    });
+  //fetch meal data for the selected meal and display meal information on the web page
+  fetch(`/api/meals/${params.id}`)
+    .then((response) => response.json())
+    .then((meal) => displaySelectedMealOnDocument(meal));
+  const addReservation = async () => {
+    // get book meal(reservation) data from the HTML Form
 
-    const successMessage = document.getElementById("success-reserve-meal");
-    successMessage.innerHTML = `${resp}`;
-  } catch (err) {
-    console.log(err);
+    const name = document.getElementById("name");
+    const no_of_guests = document.getElementById("no_of_guests");
+    const phone = document.getElementById("phone");
+    const created_date = document.getElementById("created_date");
+
+    //push book meal data from user into an object
+    const newReservation = {
+      meal_id: parseInt(params.id),
+      name: name.value,
+      no_of_guests: no_of_guests.value,
+      phone: phone.value,
+      created_date: created_date.value,
+    };
+    //Post data-- update reservation data to the database
+    try {
+      const resp = await fetch("/api/reservations", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(newReservation),
+      });
+
+      const successMessage = document.getElementById("success-reserve-meal");
+      successMessage.innerHTML = `${resp}`;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // form validation validateReservationForm()
+  function validateReservationForm() {
+    const name = document.getElementById("name").value;
+    const no_of_guests = document.getElementById("no_of_guests").value;
+    const phone = document.getElementById("phone").value;
+    if (name == "" || no_of_guests == " " || phone == "") {
+      return false;
+    }
+
+    addReservation();
   }
+
+  // get the submit button
+  const submit = document.getElementById("submit");
+  submit.addEventListener("click", validateReservationForm);
 };
-// get the submit button
-//const submit = document.getElementById("submit");
-//submit.addEventListener("click", addMeal);
-
-// form validation validateReservationForm()
-function validateReservationForm() {
-  const name = document.getElementById("name").value;
-  const no_of_guests = document.getElementById("no_of_guests").value;
-  const phone = document.getElementById("phone").value;
-  if (name == "" || no_of_guests == " " || phone == "") {
-    return false;
-  }
-
-  addReservation();
-}

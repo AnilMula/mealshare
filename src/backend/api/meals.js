@@ -9,7 +9,7 @@ router.get("/", async (request, response) => {
   try {
     if (Object.keys(request.query).length === 0) {
       await knex("meal")
-        .select("id", "title", "location", "price", "max_reservations")
+        .select("id", "title", "location", "price", "max_reservations", "when")
         .then((data) => response.json(data));
     } else if (request.query.maxPrice) {
       //6. Get meals that has a price smaller than maxPrice
@@ -86,7 +86,7 @@ router.post("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   try {
     const titles = await knex("meal")
-      .select("title", "location", "price")
+      .select("title", "location", "price", "when")
       .where({ id: request.params.id });
     response.json(titles);
   } catch (error) {
