@@ -150,11 +150,6 @@ window.handleMealsRequest = async () => {
     .then((response) => response.json())
     .then((meals) => displayMealsOnDocument(meals));
 
-  //onclick event on the image
-  const imageLink = document.getElementById("image_link_each_meal");
-  imageLink.addEventListener("click", () => {
-    window.alert("on click");
-  });
   // if any links are added to the dom, use this function
   // make the router handle those links.
   router.updatePageLinks();
