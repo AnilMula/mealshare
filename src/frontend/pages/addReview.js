@@ -67,11 +67,8 @@ window.handleAddReviewRequest = async (params) => {
           <div>
           <label>Rating(0-5)</label>
           <input class="w3-input" type="number"  min = 0 max = 5 id = "rating" name = "rating" required></div>
-          <div>
-          <label>created date</label>
-          <input class="w3-input" type="date" id = "created_date" name="created_date"  required></div>
-        
-          <button type="submit"  class="w3-yellow w3-round-large" id = "submit" onClick="validateReviewForm()">Rate</button>
+          
+          <button type="submit"  class="w3-yellow w3-round-large" id = "submit" >Rate</button>
           </form>
         
         </div>
@@ -145,14 +142,15 @@ window.handleAddReviewRequest = async (params) => {
 
     const comments = document.getElementById("comments");
     const rating = document.getElementById("rating");
-    const created_date = document.getElementById("created_date");
-
+    const created_date = `${new Date().getFullYear()}-0${
+      new Date().getMonth() + 1
+    }-${new Date().getDate()}`;
     //push review data from user into an object
     const newReview = {
       meal_id: parseInt(params.id),
       comments: comments.value,
       rating: rating.value,
-      created_date: created_date.value,
+      created_date: created_date,
     };
 
     fetch("/api/reviews", {

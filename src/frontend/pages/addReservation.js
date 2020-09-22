@@ -70,11 +70,8 @@ window.handleAddReservationRequest = async (params) => {
           <div>
           <label>phone</label>
           <input class="w3-input" type="number" min = 1 id = "phone" name = "phone" required></div>
-          <div>
-          <label>created date</label>
-          <input class="w3-input" type="date" id = "created_date" name="created_date"  required></div>
-        
-          <button type="submit" class="w3-pink w3-round-large" id = "submit" onClick="validateReservationForm()">Reserve</button>
+          
+          <button type="submit" class="w3-pink w3-round-large" id = "submit" >Reserve</button>
           </form>
         
         </div>
@@ -147,7 +144,9 @@ window.handleAddReservationRequest = async (params) => {
     const name = document.getElementById("name");
     const no_of_guests = document.getElementById("no_of_guests");
     const phone = document.getElementById("phone");
-    const created_date = document.getElementById("created_date");
+    const created_date = `${new Date().getFullYear()}-0${
+      new Date().getMonth() + 1
+    }-${new Date().getDate()}`;
 
     //push book meal data from user into an object
     const newReservation = {
@@ -155,8 +154,10 @@ window.handleAddReservationRequest = async (params) => {
       name: name.value,
       no_of_guests: no_of_guests.value,
       phone: phone.value,
-      created_date: created_date.value,
+      created_date: created_date,
     };
+    console.log(newReservation.created_date);
+    console.log(new Date().getUTCDate());
     //Post data-- update reservation data to the database
     try {
       const resp = await fetch("/api/reservations", {
