@@ -122,12 +122,21 @@ window.handleMealsRequest = async () => {
       </body>`;
 
   // a callback function to dispaly all the meals
-  const displayMealsOnDocument = (meals) => {
+  const displayMealsOnDocument = async (meals) => {
     const body = document.getElementById("all-meals");
 
-    meals.forEach((meal, index) => {
-      body.innerHTML += `<div class="w3-third w3-border">
+    meals.forEach(async (meal, index) => {
+      // fetch available reservations data for the meal
+      const availableMealsData = await fetch(
+        `/api/meals?availableReservations=true&id=${meal.id}`
+      ).then((response) => response.json());
+
+      if (Object.keys(availableMealsData).length === 0) {
+        body.innerHTML += `<div class="w3-third w3-border">
             <p>${meal.title}</p>
+            <p><b class="w3-text-green">Available </b>${
+              meal.max_reservations
+            } of ${meal.max_reservations}</p>
             <a href="meals" class="w3-bar-item w3-button" data-navigo><img
               src="../images/food${index + 1}.jpg"
               class="w3-round"
@@ -148,6 +157,37 @@ window.handleMealsRequest = async () => {
             }">Rate Meal</button></a>
 
           </div>`;
+      } else {
+        const resrvedBookings = availableMealsData[0]["sum(number_of_guests)"];
+
+        const availableBookings = meal.max_reservations - resrvedBookings;
+
+        body.innerHTML += `<div class="w3-third w3-border">
+            <p>${meal.title}</p>
+            <p><b class="w3-text-green">Available </b>${availableBookings} of ${
+          meal.max_reservations
+        }</p>
+            <a href="meals" class="w3-bar-item w3-button" data-navigo><img
+              src="../images/food${index + 1}.jpg"
+              class="w3-round"
+              alt="Random Name"
+              style="width: 60%"
+            /></a>
+            <a href="addreservation/${
+              meal.id
+            }" class="w3-bar-item w3-button" data-navigo>
+            <button class="w3-button w3-blue w3-round-xxlarge" id = "book-meal${
+              index + 1
+            }">Book Meal</button></a>
+            <a href="addreview/${
+              meal.id
+            }" class="w3-bar-item w3-button" data-navigo>            
+            <button class="w3-button w3-purple w3-round-xxlarge" id ="rate-meal${
+              index + 1
+            }">Rate Meal</button></a>
+
+          </div>`;
+      }
     });
   };
   fetch("/api/meals")

@@ -24,6 +24,7 @@ router.get("/", async (request, response) => {
       inner join reservation on meal.id =reservation.meal_id
       group by meal.id
       having meal.max_reservations > sum(number_of_guests) */
+
       await knex("meal")
         .select(
           "meal.id",
@@ -33,7 +34,7 @@ router.get("/", async (request, response) => {
         )
         .innerJoin("reservation", "meal.id", "reservation.meal_id")
         .groupBy("meal.id")
-
+        .having("meal.id", "=", request.query.id)
         .then((data) => response.json(data));
     } else if (request.query.title) {
       //8. Get meals that partially match a title.
