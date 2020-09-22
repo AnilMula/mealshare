@@ -33,7 +33,7 @@ router.get("/", async (request, response) => {
         )
         .innerJoin("reservation", "meal.id", "reservation.meal_id")
         .groupBy("meal.id")
-        .having("meal.max_reservations", ">", "sum(number_of_guests)")
+
         .then((data) => response.json(data));
     } else if (request.query.title) {
       //8. Get meals that partially match a title.
