@@ -50,11 +50,11 @@ window.handleAddReservationRequest = async (params) => {
       >
         <h2 class="w3-wide">Meal reservation</h2>
         <p class="w3-opacity"><i>you can register for a meal here </i></p>
-        <p id="success-reserve-meal"></p>
+        
         <p class="w3-justify" id = "selected-meal">
           
         </p>
-        <div class="w3-padding-small w3-blue" style="width:50%"> 
+        <div id="success-reserve-meal" class="w3-padding-small w3-blue" style="width:50%"> 
           <div class="w3-pink w3-round-large">
           <h2>Reserve Meal</h2>
           
@@ -170,16 +170,23 @@ window.handleAddReservationRequest = async (params) => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(newReservation),
       });
+      if (resp.statusText === "OK") {
+        const printMessagge = `${newReservation.name} reserved ${newReservation.no_of_guests} meals`;
 
-      const successMessage = document.getElementById("success-reserve-meal");
-      successMessage.innerHTML = `${resp}`;
+        const successMessage = document.getElementById("success-reserve-meal");
+        successMessage.innerHTML = `${printMessagge}`;
+      } else {
+        const successMessage = document.getElementById("success-reserve-meal");
+        successMessage.innerHTML = `Reservation fail`;
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   // form validation validateReservationForm()
-  function validateReservationForm() {
+  function validateReservationForm(event) {
+    event.preventDefault();
     const name = document.getElementById("name").value;
     const no_of_guests = document.getElementById("no_of_guests").value;
     const phone = document.getElementById("phone").value;

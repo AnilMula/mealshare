@@ -53,7 +53,7 @@ window.handleAddReviewRequest = async (params) => {
         <p class="w3-justify" id="selected-meal-for-review">
           
         </p>
-        <div class="w3-padding-small w3-purple" style="width:50%"> 
+        <div id="success-reserve-meal" class="w3-padding-small w3-purple" style="width:50%"> 
           <div class="w3-black">
           <h2 class = "w3-yellow w3-round-large">Rate this Meal</h2>
           
@@ -164,7 +164,17 @@ window.handleAddReviewRequest = async (params) => {
       body: JSON.stringify(newReview),
     })
       .then((resp) => {
-        alert("Rated a meal succesfully");
+        if (resp.statusText === "OK") {
+          const successMessage = document.getElementById(
+            "success-reserve-meal"
+          );
+          successMessage.innerHTML = `Review Done`;
+        } else {
+          const successMessage = document.getElementById(
+            "success-reserve-meal"
+          );
+          successMessage.innerHTML = `Reservation fail`;
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -172,7 +182,8 @@ window.handleAddReviewRequest = async (params) => {
   };
 
   // form validation
-  function validateReviewForm() {
+  function validateReviewForm(event) {
+    event.preventDefault();
     const comments = document.getElementById("comments").value;
     const rating = document.getElementById("rating").value;
     if (comments == "" || rating == " ") {
