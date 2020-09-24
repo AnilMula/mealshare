@@ -44,8 +44,7 @@ window.handleHomeRequest = () => {
           </button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
             <a href="addmeal" class="w3-bar-item w3-button" data-navigo>Add a Meal</a>
-            <a href="addreservation" class="w3-bar-item w3-button" data-navigo>Add a reservation</a>
-            <a href="#" class="w3-bar-item w3-button">Media</a>
+            
           </div>
         </div>
         <a
