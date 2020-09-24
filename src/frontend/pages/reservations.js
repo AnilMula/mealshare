@@ -121,12 +121,16 @@ window.handleReservationsRequest = async () => {
       </body>`;
 
   // a callback function to dispaly all the reservations
-  const displayReservationsOnDocument = (reservations) => {
+  const displayReservationsOnDocument = async (reservations) => {
     const body = document.getElementById("all-reservations");
 
-    reservations.forEach((reservation, index) => {
+    reservations.forEach(async (reservation, index) => {
+      // to display meal name on a reservation, we neeed to fetch the meal name from meal table
+      const meal = await fetch(
+        `/api/meals/${reservation.meal_id}`
+      ).then((response) => response.json());
       body.innerHTML += `<div class="w3-third w3-border">
-            <p>${reservation.meal_id}</p>
+            <p>${meal[0].title}</p>
             <p>${reservation.number_of_guests} for ${
         reservation.contact_name
       }</p>

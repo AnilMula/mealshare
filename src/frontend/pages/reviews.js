@@ -120,12 +120,16 @@ window.handleReviewsRequest = () => {
       </body>`;
 
   // a callback function to dispaly all the reviews
-  const displayReviewsOnDocument = (reviews) => {
+  const displayReviewsOnDocument = async (reviews) => {
     const body = document.getElementById("all-reviews");
 
-    reviews.forEach((review, index) => {
+    reviews.forEach(async (review, index) => {
+      // to display meal name on a review, we neeed to fetch the meal name from meal table
+      const meal = await fetch(
+        `/api/meals/${review.meal_id}`
+      ).then((response) => response.json());
       body.innerHTML += `<div class="w3-third w3-border">
-            <p>${review.meal_id}</p>
+            <p>${meal[0].title}</p>
             <p>rating: ${review.stars} </p>
             <img
               src="../images/food${index + 1}.jpg"
