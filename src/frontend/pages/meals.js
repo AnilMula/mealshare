@@ -143,6 +143,7 @@ window.handleMealsRequest = async () => {
               alt="Random Name"
               style="width: 60%"
             /></a>
+            <p><b class="w3-text-red">${meal.price} DKK</b></p>
             <a href="addreservation/${
               meal.id
             }" class="w3-bar-item w3-button" data-navigo>
@@ -173,6 +174,7 @@ window.handleMealsRequest = async () => {
               alt="Random Name"
               style="width: 60%"
             /></a>
+            <p><b class="w3-text-red">${meal.price} DKK</b></p>
             <a href="addreservation/${
               meal.id
             }" class="w3-bar-item w3-button" data-navigo>
