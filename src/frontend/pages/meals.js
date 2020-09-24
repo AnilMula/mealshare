@@ -81,6 +81,8 @@ window.handleMealsRequest = async () => {
       >
         <h2 class="w3-wide">All Meals</h2>
         <p class="w3-opacity"><i>We love food</i></p>
+        <div>Search Meal:<input id="serach-meal"></input></div>
+        
         <p class="w3-justify">
           
         </p>
@@ -120,11 +122,9 @@ window.handleMealsRequest = async () => {
     </footer>
 
       </body>`;
-
+  const allMeals = document.getElementById("all-meals");
   // a callback function to dispaly all the meals
   const displayMealsOnDocument = async (meals) => {
-    const body = document.getElementById("all-meals");
-
     meals.forEach(async (meal, index) => {
       // fetch available reservations data for the meal
       const availableMealsData = await fetch(
@@ -132,7 +132,7 @@ window.handleMealsRequest = async () => {
       ).then((response) => response.json());
 
       if (Object.keys(availableMealsData).length === 0) {
-        body.innerHTML += `<div class="w3-third w3-border">
+        allMeals.innerHTML += `<div class="w3-third w3-border">
             <p>${meal.title}</p>
             <p><b class="w3-text-green">Available </b>${
               meal.max_reservations
@@ -162,7 +162,7 @@ window.handleMealsRequest = async () => {
 
         const availableBookings = meal.max_reservations - resrvedBookings;
 
-        body.innerHTML += `<div class="w3-third w3-border">
+        allMeals.innerHTML += `<div class="w3-third w3-border">
             <p>${meal.title}</p>
             <p><b class="w3-text-green">Available </b>${availableBookings} of ${
           meal.max_reservations
@@ -190,9 +190,20 @@ window.handleMealsRequest = async () => {
       }
     });
   };
-  fetch("/api/meals")
-    .then((response) => response.json())
-    .then((meals) => displayMealsOnDocument(meals));
+
+  // fectch meals from api
+  const meals = await fetch("/api/meals").then((response) => response.json());
+  displayMealsOnDocument(meals);
+
+  //get input element for search a meal and an event listener on the search filed
+  const searchMeal = document.getElementById("serach-meal");
+  searchMeal.addEventListener("input", () => {
+    const filteredMeal = meals.filter((meal) =>
+      meal.title.includes(searchMeal.value)
+    );
+    allMeals.innerHTML = " ";
+    displayMealsOnDocument(filteredMeal);
+  });
 
   // if any links are added to the dom, use this function
   // make the router handle those links.
