@@ -103,13 +103,13 @@ window.handleHomeRequest = () => {
         style="max-width: 800px"
         id="band"
       >
-        <h2 class="w3-wide">Mad Skal Spises!</h2>
+        <h2 class="w3-wide">Home cooked meals</h2>
         <p class="w3-opacity"><i>We love food</i></p>
         <p class="w3-justify">
-          Food is being wasted at an alarming rate. And we - consumers - are the largest 
-          source of it. More than grocery stores and restaurants combined. But there's good
-          news: we can do something about it. Everything we need is right here (and in our 
-            fridges).
+          
+We find the best home cooks around the world so you can immerse yourself in meaningful food experiences and cultural traditions passed down through generations. Connect with local culture through food. Visit a grandmother in her kitchen in India and learn how to make crisp dosas or spend time on a farm in Northern Thailand and grind curry pastes, and experience how local people live.
+
+Choose from three unique experiences with our hosts, or pick a combination:
         </p>
         <div class="w3-row w3-padding-32">
           <div class="w3-third">
